@@ -1,4 +1,4 @@
-use day04::{INPUT, part1, part2};
+use day03::{INPUT, part1, part2};
 
 fn main() {
     let part1_result = part1::result(INPUT);
