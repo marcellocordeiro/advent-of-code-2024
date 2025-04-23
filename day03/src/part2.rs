@@ -8,7 +8,6 @@ pub fn result(input: &str) -> i32 {
 
     for pattern in patterns {
         match pattern {
-
             Pattern::Do => enabled = true,
             Pattern::Dont => enabled = false,
             Pattern::Mul { a, b } if enabled => sum += a * b,

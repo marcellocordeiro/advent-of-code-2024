@@ -1,28 +1,62 @@
-use crate::{parse_input};
+use common::point::{DOWN, LEFT, Point, RIGHT, UP};
+use itertools::Itertools;
 
-pub fn result(input: &str) -> i32 {
+use crate::parse_input;
+
+pub fn result(input: &str) -> usize {
     let word_search = parse_input(input);
-
-    let next_positions = [
-        (1, 0),
-        (0, 1),
-        (1, 1),
-    ];
 
     let mut count = 0;
 
-    let i_size = word_search.len();
-    let j_size = word_search[0].len();
+    let directions = [
+        UP,
+        UP + RIGHT,
+        RIGHT,
+        DOWN + RIGHT,
+        DOWN,
+        DOWN + LEFT,
+        LEFT,
+        UP + LEFT,
+    ];
 
-    for next_position in next_positions {
-        // Positive
-        for i in (0..(i_size - 3)) {
-            for j in (0..(j_size - 3)) {
-                
+    for j in 0..word_search.height {
+        for i in 0..word_search.width {
+            let point = Point::new(i, j);
+            let value = word_search[point];
+
+            if value != 'X' && value != 'S' {
+                //print!("{value} ");
+                continue;
             }
+
+            let string_for =
+                |points: [Point; 4]| points.iter().map(|p| word_search[*p]).collect::<String>();
+
+            let words = directions
+                .iter()
+                .map(|&dir| {
+                    [
+                        point + (dir * 0),
+                        point + (dir * 1),
+                        point + (dir * 2),
+                        point + (dir * 3),
+                    ]
+                })
+                .filter(|points| points.iter().all(|&p| word_search.contains_point(p)))
+                .map(|points| (points, string_for(points)))
+                .collect::<Vec<_>>();
+
+            if words.is_empty() {
+                continue;
+            }
+
+            let result = words
+                .into_iter()
+                .filter(|(_, word)| word == "XMAS")
+                .collect_vec();
+
+            count += result.len();
         }
-
-
     }
 
     count
@@ -37,13 +71,13 @@ mod tests {
     fn test_sample() {
         let result = result(SAMPLE);
 
-        assert_eq!(result, 2);
+        assert_eq!(result, 18);
     }
 
     #[test]
     fn test_input() {
         let result = result(INPUT);
 
-        assert_eq!(result, 549);
+        assert_eq!(result, 2599);
     }
 }

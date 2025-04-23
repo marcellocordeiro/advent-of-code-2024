@@ -38,8 +38,8 @@ missing_panics_doc = "allow"
 path = "./common"
 
 [workspace.dependencies]
-colored = "2.1.0"
-itertools = "0.13.0"
+colored = "3.0.0"
+itertools = "0.14.0"
 num = "0.4.1"
 pathfinding = "4.8.0"
 regex = "1.10.2"

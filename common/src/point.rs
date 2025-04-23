@@ -1,6 +1,6 @@
 pub type PointDataType = i32;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Point {
     pub i: PointDataType,
     pub j: PointDataType,
@@ -13,14 +13,14 @@ pub const RIGHT: Point = Point::new(1, 0);
 
 impl Point {
     pub const fn new(i: PointDataType, j: PointDataType) -> Self {
-        Point { i, j }
+        Self { i, j }
     }
 }
 
 impl std::ops::Add for Point {
     type Output = Self;
 
-    fn add(self, rhs: Point) -> Self::Output {
+    fn add(self, rhs: Self) -> Self::Output {
         Self::new(self.i + rhs.i, self.j + rhs.j)
     }
 }
@@ -35,7 +35,7 @@ impl std::ops::AddAssign for Point {
 impl std::ops::Sub for Point {
     type Output = Self;
 
-    fn sub(self, rhs: Point) -> Self::Output {
+    fn sub(self, rhs: Self) -> Self::Output {
         Self::new(self.i - rhs.i, self.j - rhs.j)
     }
 }
@@ -52,7 +52,7 @@ impl std::ops::Mul<PointDataType> for Point {
 
     /// Useful for specifying positions like `DOWN * 2`
     fn mul(self, rhs: PointDataType) -> Self::Output {
-        Point::new(self.i * rhs, self.j * rhs)
+        Self::new(self.i * rhs, self.j * rhs)
     }
 }
 
