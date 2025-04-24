@@ -19,9 +19,9 @@ pub fn result(input: &str) -> usize {
         UP + LEFT,
     ];
 
-    for j in 0..word_search.height {
-        for i in 0..word_search.width {
-            let point = Point::new(i, j);
+    for y in 0..word_search.height {
+        for x in 0..word_search.width {
+            let point = Point::new(x, y);
             let value = word_search[point];
 
             if value != 'X' && value != 'S' {
