@@ -4,7 +4,7 @@ pub const SAMPLE: &str = include_str!("inputs/sample.txt");
 pub mod part1;
 pub mod part2;
 
-pub fn parse_input(input: &str) -> Vec<Vec<i32>> {
+fn parse_input(input: &str) -> Vec<Vec<i32>> {
     input
         .lines()
         .map(|line| {
@@ -15,7 +15,7 @@ pub fn parse_input(input: &str) -> Vec<Vec<i32>> {
         .collect()
 }
 
-pub fn is_safe(report: &[i32]) -> bool {
+fn is_safe(report: &[i32]) -> bool {
     let mut report_is_increasing = None;
 
     report.windows(2).all(|win| {

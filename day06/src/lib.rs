@@ -47,9 +47,6 @@ fn parse_input(input: &str) -> Input {
     let initial_position = initial_position.unwrap();
     let initial_direction = initial_direction.unwrap();
 
-    dbg!(&initial_position);
-    dbg!(&initial_direction);
-
     Input {
         grid,
         initial_position,
