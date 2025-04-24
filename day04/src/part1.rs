@@ -36,7 +36,7 @@ pub fn result(input: &str) -> usize {
                 .iter()
                 .map(|&dir| {
                     [
-                        point + (dir * 0),
+                        point,
                         point + (dir * 1),
                         point + (dir * 2),
                         point + (dir * 3),

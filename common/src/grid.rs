@@ -65,15 +65,17 @@ impl<T> std::ops::Index<Point> for Grid<T> {
 
     fn index(&self, index: Point) -> &Self::Output {
         let resolved_index = index.x + (index.y * self.width);
+        let resolved_index = usize::try_from(resolved_index).unwrap();
 
-        &self.data[resolved_index as usize]
+        &self.data[resolved_index]
     }
 }
 
 impl<T> std::ops::IndexMut<Point> for Grid<T> {
     fn index_mut(&mut self, index: Point) -> &mut Self::Output {
         let resolved_index = index.x + (index.y * self.width);
+        let resolved_index = usize::try_from(resolved_index).unwrap();
 
-        &mut self.data[resolved_index as usize]
+        &mut self.data[resolved_index]
     }
 }

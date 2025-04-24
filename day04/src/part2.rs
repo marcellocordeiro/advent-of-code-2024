@@ -3,6 +3,8 @@ use itertools::Itertools;
 
 use crate::parse_input;
 
+const POSSIBLE_ENCODINGS: [&str; 4] = ["MMSS", "SSMM", "SMMS", "MSSM"];
+
 pub fn result(input: &str) -> usize {
     let word_search = parse_input(input);
 
@@ -36,8 +38,6 @@ pub fn result(input: &str) -> usize {
             if m_a_count != 4 {
                 continue;
             }
-
-            const POSSIBLE_ENCODINGS: [&str; 4] = ["MMSS", "SSMM", "SMMS", "MSSM"];
 
             if !POSSIBLE_ENCODINGS.contains(&configuration_encoding.as_str()) {
                 continue;
