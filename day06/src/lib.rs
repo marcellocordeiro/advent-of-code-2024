@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 use common::{grid::Grid, point::Point};
 use itertools::Itertools;
 
@@ -79,27 +77,4 @@ fn next_state(grid: &Grid<char>, position: Point, direction: Point) -> Action {
             direction: direction.rotated_90(),
         }
     }
-}
-
-fn print_grid(grid: &Grid<char>, position: Point, direction: Point, marked: &HashSet<Point>) {
-    dbg!(&position);
-    for y in 0..grid.height {
-        for x in 0..grid.width {
-            let point = Point::new(x, y);
-            let value = grid[point];
-
-            if point == position {
-                let dir_ch = direction.to_direction_char();
-                print!("{dir_ch}");
-            } else if marked.contains(&point) {
-                print!("X");
-            } else {
-                print!("{value}");
-            }
-        }
-
-        println!();
-    }
-
-    println!();
 }
