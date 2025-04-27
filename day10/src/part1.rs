@@ -30,8 +30,6 @@ fn visit(map: &Grid<i32>, position: Point, previous_position: Point, visited: &m
         return;
     }
 
-    //visited.insert(position);
-
     let current_height = map[position];
 
     for dir in [UP, DOWN, LEFT, RIGHT] {
@@ -56,22 +54,14 @@ fn visit(map: &Grid<i32>, position: Point, previous_position: Point, visited: &m
 fn possible_start_points(map: &Grid<i32>) -> HashSet<Point> {
     let mut points = HashSet::new();
 
-    let mut check = |p: Point| {
-        let value = map[p];
-
-        if value == 0 {
-            points.insert(p);
-        }
-    };
-
-    for x in 0..map.width {
-        check(Point::new(x, 0));
-        check(Point::new(x, map.height - 1));
-    }
-
     for y in 0..map.height {
-        check(Point::new(0, y));
-        check(Point::new(map.width - 1, y));
+        for x in 0..map.width {
+            let point = Point::new(x, y);
+
+            if map[point] == 0 {
+                points.insert(point);
+            }
+        }
     }
 
     points
@@ -93,6 +83,6 @@ mod tests {
     fn test_input() {
         let result = result(INPUT);
 
-        assert_eq!(result, 0);
+        assert_eq!(result, 816);
     }
 }
