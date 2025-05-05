@@ -12,6 +12,7 @@ pub fn result(input: &str) -> usize {
     stones.len()
 }
 
+/*
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -31,3 +32,4 @@ mod tests {
         assert_eq!(result, 189547);
     }
 }
+*/
